@@ -1,2 +1,4 @@
 # web
-(WIP) Website and Blog
+
+(WIP) Blog and personal site made in Swift with [Publish](https://github.com/JohnSundell/Publish), a static site generator. 
+
