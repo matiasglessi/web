@@ -18,8 +18,8 @@ struct Web: Website {
 
     // Update these properties to configure your website:
     var url = URL(string: "https://matiasglessi.com")!
-    var name = "Matias Glessi"
-    var description = "iOS Engineer"
+    var name = "Matias Glessi | iOS Engineer"
+    var description = ""
     var language: Language { .english }
     var imagePath: Path? { nil }
     var mediaLinks: [MediaLink] { [.location, .email, .linkedIn, .github] }
@@ -54,6 +54,21 @@ private struct Wrapper: ComponentContainer {
     }
 }
 
+private struct SiteFooter: Component {
+    var body: Component {
+        Footer {
+            Paragraph {
+                Text("Generated using ")
+                Link("Publish", url: "https://github.com/johnsundell/publish")
+            }
+            Paragraph {
+                Text("2022")
+            }
+        }
+    }
+}
+
+
 private struct Sidebar<Site: Website>: Component {
     var context: PublishingContext<Site>
     var mediaLinks: [MediaLink] { [.location, .email, .linkedIn, .github] }
@@ -68,10 +83,38 @@ private struct Sidebar<Site: Website>: Component {
             H2("iOS Engineer")
             Wrapper {
                 List(mediaLinks) { item in
-                    H3(item.title)
+                    Link(item.title, url: item.url)
                 }.class("mediaLinks-list")
             }
+        }.class("sidebar")
+    }
+}
+
+private struct ItemTagList<Site: Website>: Component {
+    var item: Item<Site>
+    var site: Site
+
+    var body: Component {
+        List(item.tags) { tag in
+            Link(tag.string, url: site.path(for: tag).absoluteString)
         }
+        .class("tag-list")
+    }
+}
+
+private struct ItemList<Site: Website>: Component {
+    var items: [Item<Site>]
+    var site: Site
+
+    var body: Component {
+        List(items) { item in
+            Article {
+                H1(Link(item.title, url: item.path.absoluteString))
+                ItemTagList(item: item, site: site)
+                Paragraph(item.description)
+            }
+        }
+        .class("item-list")
     }
 }
 
@@ -82,6 +125,17 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: index, on: context.site),
             .body {
                 Sidebar(context: context)
+                Wrapper {
+                    H2("Latest content")
+                    ItemList(
+                        items: context.allItems(
+                            sortedBy: \.date,
+                            order: .descending
+                        ),
+                        site: context.site
+                    )
+                }
+                SiteFooter()
             }
         )	
     }
