@@ -3,7 +3,6 @@ import Publish
 import Plot
 import SplashPublishPlugin
 
-
 // This type acts as the configuration for your website.
 struct Web: Website {
     enum SectionID: String, WebsiteSectionID {
@@ -23,63 +22,100 @@ struct Web: Website {
     var description = "iOS Engineer"
     var language: Language { .english }
     var imagePath: Path? { nil }
-    var socialMediaLinks: [SocialMediaLink] { [.location, .email, .linkedIn, .github, .twitter] }
-
+    var mediaLinks: [MediaLink] { [.location, .email, .linkedIn, .github] }
 }
 
-// This will generate your website using the built-in Foundation theme:
-try Web().publish(withTheme: .web,
-                  plugins: [.splash(withClassPrefix: "")])
+public struct MediaLink {
+    let title: String
+    let url: URLRepresentable
+    let icon: URLRepresentable
+}
 
-extension Theme where Site == Web {
-    static var web: Self {
-        Theme(htmlFactory: WebHTMLFactory())
+extension MediaLink {
+    static var location: MediaLink {
+        MediaLink(title: "La Plata, Argentina 🇦🇷", url: "http://google.com.ar", icon: "http://google.com.ar")
+    }
+    static var email: MediaLink {
+        MediaLink(title: "matiasglessi@gmail.com", url: "http://google.com.ar", icon: "http://google.com.ar")
+    }
+    static var linkedIn: MediaLink {
+        MediaLink(title: "LinkedIn", url: "http://google.com.ar", icon: "http://google.com.ar")
+    }
+    static var github: MediaLink {
+        MediaLink(title: "Github", url: "http://google.com.ar", icon: "http://google.com.ar")
     }
 }
 
-struct WebHTMLFactory: HTMLFactory {
-    typealias Site = Web
+private struct Wrapper: ComponentContainer {
+    @ComponentBuilder var content: ContentProvider
 
-    func makeSectionHTML(for section: Section<Web>, context: PublishingContext<Web>) throws -> HTML {
-        HTML("")
+    var body: Component {
+        Div(content: content).class("wrapper")
     }
-    
-    func makeItemHTML(for item: Item<Web>, context: PublishingContext<Web>) throws -> HTML {
-        HTML("")
+}
+
+private struct Sidebar<Site: Website>: Component {
+    var context: PublishingContext<Site>
+    var mediaLinks: [MediaLink] { [.location, .email, .linkedIn, .github] }
+
+    var body: Component {
+        Wrapper {
+            Image(
+                url: "https://avatars0.githubusercontent.com/u/9439622?s=460&v=4",
+                description: "Matias Glessi's profile picture"
+            )
+            H1("Matias Glessi")
+            H2("iOS Engineer")
+            Wrapper {
+                List(mediaLinks) { item in
+                    H3(item.title)
+                }.class("mediaLinks-list")
+            }
+        }
     }
-    
-    func makePageHTML(for page: Page, context: PublishingContext<Web>) throws -> HTML {
-        HTML("")
-    }
-    
-    func makeTagListHTML(for page: TagListPage, context: PublishingContext<Web>) throws -> HTML? {
-        nil
-    }
-    
-    func makeTagDetailsHTML(for page: TagDetailsPage, context: PublishingContext<Web>) throws -> HTML? {
-        nil
-    }
-    
-    
-    func makeIndexHTML(for index: Index, context: PublishingContext<Web>) throws -> HTML {
+}
+
+struct MyHTMLFactory<Site: Website>: HTMLFactory {
+    func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: context.site),
-            .body(
-                .grid(
-                    .header(for: context.site),
-                    .sidebar(for: context.site),
-                    .posts(
-                        for: context.allItems(
-                            sortedBy: \.date,
-                            order: .descending
-                        ),
-                        on: context.site,
-                        title: "Recent posts"
-                    ),
-                    .footer(for: context.site)
-                )
-            )
+            .head(for: index, on: context.site),
+            .body {
+                Sidebar(context: context)
+            }
+        )	
+    }
+    
+    func makeSectionHTML(for section: Section<Site>, context: PublishingContext<Site>) throws -> HTML {
+        HTML("")
+    }
+    
+    func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
+        HTML("")
+    }
+    
+    func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
+        HTML("")
+    }
+    
+    func makeTagListHTML(for page: TagListPage, context: PublishingContext<Site>) throws -> HTML? {
+        nil
+    }
+    
+    func makeTagDetailsHTML(for page: TagDetailsPage, context: PublishingContext<Site>) throws -> HTML? {
+        nil
+    }
+}
+
+extension Theme {
+    static var myTheme: Theme {
+        Theme(
+            htmlFactory: MyHTMLFactory(),
+            resourcePaths: ["Resources/MyTheme/styles.css"]
         )
     }
 }
+// This will generate your website using the built-in Foundation theme:
+try Web().publish(withTheme: .myTheme)
+
+
