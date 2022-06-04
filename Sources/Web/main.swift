@@ -29,20 +29,28 @@ public struct MediaLink {
     let title: String
     let url: URLRepresentable
     let icon: URLRepresentable
+    let classValue: String
+    
+    init(title: String, url: URLRepresentable, icon: URLRepresentable, classValue: String = "mediaLink") {
+        self.title = title
+        self.url = url
+        self.icon = icon
+        self.classValue = classValue
+    }
 }
 
 extension MediaLink {
     static var location: MediaLink {
-        MediaLink(title: "La Plata, Argentina 🇦🇷", url: "http://google.com.ar", icon: "http://google.com.ar")
+        MediaLink(title: "La Plata, Argentina 🇦🇷", url: "https://es.wikipedia.org/wiki/La_Plata", icon: "images/point.png", classValue: "location")
     }
     static var email: MediaLink {
-        MediaLink(title: "matiasglessi@gmail.com", url: "http://google.com.ar", icon: "http://google.com.ar")
+        MediaLink(title: "matiasglessi@gmail.com", url: "mailto:matiasglessi@gmail.com", icon: "images/mail.png", classValue: "mail")
     }
     static var linkedIn: MediaLink {
-        MediaLink(title: "LinkedIn", url: "http://google.com.ar", icon: "http://google.com.ar")
+        MediaLink(title: "LinkedIn", url: "https://www.linkedin.com/in/matias-alejandro-glessi/", icon: "images/linkedin.svg", classValue: "linkedin")
     }
     static var github: MediaLink {
-        MediaLink(title: "Github", url: "http://google.com.ar", icon: "http://google.com.ar")
+        MediaLink(title: "GitHub", url: "https://github.com/matiasglessi", icon: "images/github.svg", classValue: "github")
     }
 }
 
@@ -68,6 +76,29 @@ private struct SiteFooter: Component {
     }
 }
 
+extension MediaLink {
+    static var blog: MediaLink {
+        MediaLink(title: "BLOG", url: "http://google.com.ar", icon: "http://google.com.ar", classValue: "current")
+    }
+    static var about: MediaLink {
+        MediaLink(title: "ABOUT", url: "http://google.com.ar", icon: "http://google.com.ar")
+    }
+}
+
+private struct Navbar<Site: Website>: Component {
+    var context: PublishingContext<Site>
+    var mediaLinks: [MediaLink] { [.blog, .about] }
+    
+    var body: Component {
+        Wrapper {
+            List(mediaLinks) { item in
+                Link(item.title, url: item.url)
+                    .class(item.classValue)
+            }.class("mediaLinks-list")
+        }.class("navbar")
+    }
+}
+
 
 private struct Sidebar<Site: Website>: Component {
     var context: PublishingContext<Site>
@@ -79,11 +110,13 @@ private struct Sidebar<Site: Website>: Component {
                 url: "https://avatars0.githubusercontent.com/u/9439622?s=460&v=4",
                 description: "Matias Glessi's profile picture"
             )
-            H1("Matias Glessi")
+            H1("Matías Glessi")
             H2("iOS Engineer")
             Wrapper {
                 List(mediaLinks) { item in
-                    Link(item.title, url: item.url)
+                    Wrapper {
+                        Link(item.title, url: item.url)
+                    }.class(item.classValue)
                 }.class("mediaLinks-list")
             }
         }.class("sidebar")
@@ -109,12 +142,50 @@ private struct ItemList<Site: Website>: Component {
     var body: Component {
         List(items) { item in
             Article {
+                H4(item.date.asBlogString())
                 H1(Link(item.title, url: item.path.absoluteString))
-                ItemTagList(item: item, site: site)
                 Paragraph(item.description)
             }
         }
         .class("item-list")
+    }
+}
+
+extension Date {
+    
+    func asBlogString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "MMMM d, yyyy"
+        return dateFormatter.string(from: self).uppercased()
+    }
+}
+
+
+private struct MobileNavbar<Site: Website>: Component {
+    var context: PublishingContext<Site>
+    var mediaLinks: [MediaLink] { [.blog, .about] }
+    
+    var body: Component {
+        Wrapper {
+            H1("Matías Glessi | iOS Engineer 👨‍💻")
+            Image(
+                url: "images/menu.svg",
+                description: "Menu icon"
+            )
+            Input(type: .checkbox).id("checkbox")
+            Label("") {
+                Image(
+                    url: "images/menu.svg",
+                    description: "Menu icon"
+                ).class("menu-icon")
+            }.attribute(named: "for", value: "checkbox")
+            Wrapper {
+                List(mediaLinks) { item in
+                    Link(item.title, url: item.url)
+                }.class("mediaLinks-list")
+            }.class("dropdown-menu")
+        }.class("mobile-navbar")
     }
 }
 
@@ -124,18 +195,21 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: index, on: context.site),
             .body {
-                Sidebar(context: context)
                 Wrapper {
-                    H2("Latest content")
-                    ItemList(
-                        items: context.allItems(
-                            sortedBy: \.date,
-                            order: .descending
-                        ),
-                        site: context.site
-                    )
-                }
-                SiteFooter()
+                    MobileNavbar(context: context)
+                    Sidebar(context: context)
+                    Wrapper {
+                        Navbar(context: context)
+                        ItemList(
+                            items: context.allItems(
+                                sortedBy: \.date,
+                                order: .descending
+                            ),
+                            site: context.site
+                        )
+                        SiteFooter()
+                    }.class("right-content")
+                }.class("container")
             }
         )	
     }
