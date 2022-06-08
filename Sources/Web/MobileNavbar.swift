@@ -11,8 +11,14 @@ import Publish
 
 struct MobileNavbar<Site: Website>: Component {
     var context: PublishingContext<Site>
-    var mediaLinks: [MediaLink] { [.blog, .about] }
+    var mediaLinks: [MediaLink]
+
+    init(context: PublishingContext<Site>, mediaLinks: [MediaLink] = []) {
+        self.context = context
+        self.mediaLinks = mediaLinks
+    }
     
+    /*
     var body: Component {
         Wrapper {
             H1("Matías Glessi | iOS Engineer 👨‍💻")
@@ -30,4 +36,15 @@ struct MobileNavbar<Site: Website>: Component {
             }.class("dropdown-menu")
         }.class("mobile-navbar")
     }
+    */
+    var body: Component {
+        Wrapper {
+            H1("Matías Glessi 👨‍💻")
+            List(mediaLinks) { item in
+                Link(item.title.capitalized, url: item.url)
+                    .class(item.classValue)
+            }.class("mediaLinks-list")
+        }.class("mobile-navbar")
+    }
+
 }

@@ -13,7 +13,7 @@ struct Web: Website {
 
     struct ItemMetadata: WebsiteItemMetadata {
         // Add any site-specific metadata that you want to use here.
-        var excerpt: String
+//        var excerpt: String
     }
 
     // Update these properties to configure your website:
@@ -26,6 +26,5 @@ struct Web: Website {
 }
 
 // This will generate your website using the built-in Foundation theme:
-try Web().publish(withTheme: .myTheme)
-
+try Web().publish(withTheme: .myTheme, plugins: [.splash(withClassPrefix: "")])
 

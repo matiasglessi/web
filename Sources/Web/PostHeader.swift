@@ -1,15 +1,17 @@
 //
-//  Navbar.swift
+//  PostHeader.swift
 //  
 //
-//  Created by Matias Glessi on 04/06/2022.
+//  Created by Matias Glessi on 08/06/2022.
 //
+
+import Foundation
 
 import Foundation
 import Plot
 import Publish
 
-struct Navbar<Site: Website>: Component {
+struct PostHeader<Site: Website>: Component {
     var context: PublishingContext<Site>
     var mediaLinks: [MediaLink]
 
@@ -20,10 +22,13 @@ struct Navbar<Site: Website>: Component {
     
     var body: Component {
         Wrapper {
+            H1("Matías Glessi 👨‍💻")
             List(mediaLinks) { item in
-                Link(item.title, url: item.url)
+                Link(item.title.capitalized, url: item.url)
                     .class(item.classValue)
             }.class("mediaLinks-list")
-        }.class("navbar")
+        }.class("mobile-navbar")
     }
+
 }
+

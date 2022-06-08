@@ -12,11 +12,11 @@ struct SiteFooter: Component {
     var body: Component {
         Footer {
             Paragraph {
-                Text("Generated using ")
+                Text("Generated in Swift ❤️, using ")
                 Link("Publish", url: "https://github.com/johnsundell/publish")
             }
             Paragraph {
-                Text("2022")
+                Text("© Copyright 2022")
             }
         }
     }

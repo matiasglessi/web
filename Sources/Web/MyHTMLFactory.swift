@@ -11,15 +11,27 @@ import Plot
 
 struct MyHTMLFactory<Site: Website>: HTMLFactory {
     func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
-        HTML(
+        
+        let mediaLinks = [
+            MediaLink(title: "BLOG", url: "http://google.com.ar", icon: "http://google.com.ar", classValue: "current"),
+            MediaLink(title: "ABOUT", url: "http://google.com.ar", icon: "http://google.com.ar")
+        ]
+        
+        return HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site),
             .body {
                 Wrapper {
-                    MobileNavbar(context: context)
+                    MobileNavbar(
+                        context: context,
+                        mediaLinks: mediaLinks
+                    )
                     Sidebar(context: context)
                     Wrapper {
-                        Navbar(context: context)
+                        Navbar(
+                            context: context,
+                            mediaLinks: mediaLinks
+                        )
                         ItemList(
                             items: context.allItems(
                                 sortedBy: \.date,
@@ -39,7 +51,37 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     }
     
     func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
-        HTML("")
+        let mediaLinks = [
+            MediaLink(title: "BLOG", url: "http://google.com.ar", icon: "http://google.com.ar", classValue: "current"),
+            MediaLink(title: "ABOUT", url: "http://google.com.ar", icon: "http://google.com.ar")
+        ]
+
+        return HTML(
+            .lang(context.site.language),
+            .head(for: item, on: context.site),
+            .body {
+                Wrapper {
+                    MobileNavbar(
+                        context: context,
+                        mediaLinks: mediaLinks
+                    )
+                    Sidebar(context: context)
+                    Wrapper {
+                        Navbar(
+                            context: context,
+                            mediaLinks: mediaLinks
+                        )
+                        Wrapper {
+                            Article {
+                                PostHeader(context: context)
+                                Div(item.content.body).class("content")
+                            }
+                        }
+                        SiteFooter()
+                    }.class("right-content")
+                }.class("container")
+            }
+        )
     }
     
     func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
