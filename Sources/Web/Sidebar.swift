@@ -34,7 +34,7 @@ struct Sidebar<Site: Website>: Component {
 
 extension MediaLink {
     static var location: MediaLink {
-        MediaLink(title: "La Plata, Argentina 🇦🇷", url: "https://es.wikipedia.org/wiki/La_Plata", icon: "images/point.png", classValue: "location")
+        MediaLink(title: "La Plata, Argentina  🇦🇷", url: "https://es.wikipedia.org/wiki/La_Plata", icon: "images/point.png", classValue: "location")
     }
     static var email: MediaLink {
         MediaLink(title: "matiasglessi@gmail.com", url: "mailto:matiasglessi@gmail.com", icon: "images/mail.png", classValue: "mail")

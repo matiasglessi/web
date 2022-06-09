@@ -73,7 +73,7 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
                         )
                         Wrapper {
                             Article {
-                                PostHeader(context: context)
+                                PostHeader(context: context, item: item)
                                 Div(item.content.body).class("content")
                             }
                         }

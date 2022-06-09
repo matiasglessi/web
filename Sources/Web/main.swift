@@ -2,6 +2,7 @@ import Foundation
 import Publish
 import Plot
 import SplashPublishPlugin
+import ReadingTimePublishPlugin
 
 // This type acts as the configuration for your website.
 struct Web: Website {
@@ -13,7 +14,7 @@ struct Web: Website {
 
     struct ItemMetadata: WebsiteItemMetadata {
         // Add any site-specific metadata that you want to use here.
-//        var excerpt: String
+       var link: String?
     }
 
     // Update these properties to configure your website:
@@ -22,9 +23,13 @@ struct Web: Website {
     var description = ""
     var language: Language { .english }
     var imagePath: Path? { nil }
-    var mediaLinks: [MediaLink] { [.location, .email, .linkedIn, .github] }
 }
 
-// This will generate your website using the built-in Foundation theme:
-try Web().publish(withTheme: .myTheme, plugins: [.splash(withClassPrefix: "")])
-
+try Web().publish(using: [
+    .installPlugin(.splash(withClassPrefix: "")),
+    .copyResources(),
+    .addMarkdownFiles(),
+    .sortItems(by: \.date, order: .descending),
+    .installPlugin(.readingTime()),
+    .generateHTML(withTheme: .myTheme)
+])
