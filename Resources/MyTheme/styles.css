@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300&family=Roboto+Mono:wght@300&display=swap');
 
 :root {
     --primary-color:  rgb(227, 247, 243);
@@ -170,15 +170,69 @@ footer {
 
 /* Post Screen*/ 
 
-
-
-.content {
-    margin-top: 60px;
+/* Header*/ 
+.wrapper.post-header {
+    margin-top: 30px;
     margin-left: 40px;
     margin-right: 40px;
 }
 
-.content h1 {
+/* Header Title*/ 
+.wrapper.post-header h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+.wrapper.post-header h1 a {
+        text-decoration: none;
+}
+
+/* Header Elements*/ 
+
+.post-header-links {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.post-header-links li {
+    margin-bottom: 10px;
+}
+
+.reading-time {
+    background:url('../images/clock.svg') no-repeat;
+    background-position:0px 3px;
+    background-size: 18px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+.no-link-label {
+    background:url('../images/link.png') no-repeat;
+    background-position:0px 3px;
+    background-size: 18px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+.linked-label {
+    background:url('../images/link.png') no-repeat;
+    background-position:0px 3px;
+    background-size: 18px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+/* Article*/ 
+.content {
+    margin-top: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.content p {
+    margin-top: 50px;
+    margin-bottom: 40px;
 
 }
 
@@ -283,7 +337,7 @@ footer {
     }
 }
 
-/* Splash CSS Colors*/
+/* Code-Splash CSS Colors*/
 
 pre {
     margin-bottom: 1.5em;
@@ -293,7 +347,6 @@ pre {
 }
 
 pre code {
-    font-family: monospace;
     display: block;
     padding: 0 20px;
     color: #a9bcbc;
@@ -302,26 +355,32 @@ pre code {
     overflow-x: auto;
     white-space: pre;
     -webkit-overflow-scrolling: touch;
+    font-family: 'Roboto Mono', monospace;
 }
 
 pre code .keyword {
     color: #e73289;
+    font-family: 'Roboto Mono', monospace;
 }
 
 pre code .type {
     color: #8281ca;
+    font-family: 'Roboto Mono', monospace;
 }
 
 pre code .call {
     color: #348fe5;
+    font-family: 'Roboto Mono', monospace;
 }
 
 pre code .property {
     color: #21ab9d;
+    font-family: 'Roboto Mono', monospace;
 }
 
 pre code .number {
     color: #db6f57;
+    font-family: 'Roboto Mono', monospace;
 }
 
 pre code .string {

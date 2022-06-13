@@ -13,6 +13,7 @@ In this [article](http://xunitpatterns.com/Test%20Double.html), Gerard Meszaros 
 
 To do this, we will follow this simple example:
 
+
 ```swift
 typealias Days = Int
 let REGISTERED_USER = "matiasglessi@gmail.com"

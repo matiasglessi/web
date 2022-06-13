@@ -40,6 +40,6 @@ struct PostHeader<Site: Website>: Component {
 //        if let item1 = item as? WebsiteItemMetadata {
 //            item1.
 //        }
-        return false
+        return true
     }
 }
