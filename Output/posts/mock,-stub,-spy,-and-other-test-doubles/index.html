@@ -105,19 +105,18 @@
         emailServiceWasCalled &amp;&amp; emailsSentCount == <span class="number">1</span>
     }
 }
-</code></pre><p>The EmailServiceMock acts as a Spy, saving information regarding the call made. This information is then validated in the mock itself, in its verify() method, where it evaluates that the behavior has been as expected: in this case, that the service was actually called and that a single email was sent. This would be the evaluation, analyzing the result of the verify() method in the EmailServiceMock itself:</p><pre><code>     <span class="keyword">func</span> test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalledCorrectly() {
-        <span class="keyword">let</span> emailService = <span class="type">EmailServiceMock</span>()
-        <span class="keyword">let</span> databaseService = <span class="type">CloseToExpirationDatabaseServiceStub</span>()
-        
-        <span class="keyword">let</span> notificationService = <span class="type">NotificationService</span>(
-            emailService: emailService,
-            databaseService: databaseService
-        )
-        
-        notificationService.<span class="call">validateStatus</span>()
-        
-        <span class="call">XCTAssertTrue</span>(emailService.<span class="call">verify</span>())
-    }
+</code></pre><p>The EmailServiceMock acts as a Spy, saving information regarding the call made. This information is then validated in the mock itself, in its verify() method, where it evaluates that the behavior has been as expected: in this case, that the service was actually called and that a single email was sent. This would be the evaluation, analyzing the result of the verify() method in the EmailServiceMock itself:</p><pre><code><span class="keyword">func</span> test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalledCorrectly() {
+    <span class="keyword">let</span> emailService = <span class="type">EmailServiceMock</span>()
+    <span class="keyword">let</span> databaseService = <span class="type">CloseToExpirationDatabaseServiceStub</span>()
+    
+    <span class="keyword">let</span> notificationService = <span class="type">NotificationService</span>(
+        emailService: emailService,
+        databaseService: databaseService
+    )
+    
+    notificationService.<span class="call">validateStatus</span>()
+    
+    <span class="call">XCTAssertTrue</span>(emailService.<span class="call">verify</span>())
 }
 </code></pre><p>We use mocks when we don't want to call production code or when there is no easy way to verify that the system actually did something. The only thing we can do for these cases is to verify that the service was called and works (and what that implies, which may be making calls to other mocked services).</p><h3>Fake</h3><p>Fake objects are those that have working implementations, but usually have some shortcut or structure that makes them unfeasible for production use. Unlike any other type of Test Double, they have real business behavior, which can be complex to manage (even requiring their own tests) and dangerous, since they can easily be used in production.</p><p>In this case, we can create a Fake as follows:</p><pre><code><span class="keyword">class</span> FakeDatabaseService: <span class="type">DatabaseService</span> {
     

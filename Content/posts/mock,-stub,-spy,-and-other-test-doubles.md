@@ -189,19 +189,18 @@ The EmailServiceMock acts as a Spy, saving information regarding the call made. 
 This would be the evaluation, analyzing the result of the verify() method in the EmailServiceMock itself:
 
 ```swift
-    func test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalledCorrectly() {
-        let emailService = EmailServiceMock()
-        let databaseService = CloseToExpirationDatabaseServiceStub()
-        
-        let notificationService = NotificationService(
-            emailService: emailService,
-            databaseService: databaseService
-        )
-        
-        notificationService.validateStatus()
-        
-        XCTAssertTrue(emailService.verify())
-    }
+func test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalledCorrectly() {
+    let emailService = EmailServiceMock()
+    let databaseService = CloseToExpirationDatabaseServiceStub()
+    
+    let notificationService = NotificationService(
+        emailService: emailService,
+        databaseService: databaseService
+    )
+    
+    notificationService.validateStatus()
+    
+    XCTAssertTrue(emailService.verify())
 }
 ```
 

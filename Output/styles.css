@@ -231,9 +231,12 @@ footer {
 }
 
 .content p {
-    margin-top: 50px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
 
+.content h3 {
+    margin-top: 25px;
 }
 
 @media screen and (max-width: 768px) {
@@ -340,14 +343,16 @@ footer {
 /* Code-Splash CSS Colors*/
 
 pre {
+    display: block;
     margin-bottom: 1.5em;
     background-color: #1a1a1a;
     padding: 16px 0;
     border-radius: 16px;
+    word-wrap: normal;
+
 }
 
 pre code {
-    display: block;
     padding: 0 20px;
     color: #a9bcbc;
     line-height: 1.4em;
@@ -355,46 +360,50 @@ pre code {
     overflow-x: auto;
     white-space: pre;
     -webkit-overflow-scrolling: touch;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .keyword {
     color: #e73289;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .type {
     color: #8281ca;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .call {
     color: #348fe5;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .property {
     color: #21ab9d;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .number {
     color: #db6f57;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .string {
     color: #fa641e;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .comment {
     color: #6b8a94;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .dotAccess {
     color: #92b300;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 pre code .preprocessing {
     color: #b68a00;
+    font-family: 'Roboto Mono', monospace; 
 }
