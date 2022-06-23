@@ -30,8 +30,6 @@ ul {
     display: none;
 }
 
-
-
 /* Main Content*/
 .wrapper.right-content {
     grid-area: main;
@@ -224,10 +222,18 @@ footer {
 }
 
 /* Article*/ 
+
 .content {
     margin-top: 15px;
     margin-left: 40px;
     margin-right: 40px;
+    word-break: break-word;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    max-width: 100%;
+    white-space: break-spaces;
 }
 
 .content p {
@@ -237,6 +243,133 @@ footer {
 
 .content h3 {
     margin-top: 25px;
+}
+
+
+
+/* Code-Splash CSS Colors*/
+
+
+/*
+pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #f36d33;
+    color: #666;
+    font-family: 'Roboto Mono', monospace; 
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    padding: 1em 1.5em;
+    display: inline-table;
+    width: 100px; 
+
+    margin: 4px, 4px;
+    padding: 4px;
+    background-color: #08c708;
+    width: 300px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+}
+
+code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    padding: 2px;
+}
+*/
+
+pre {
+    margin-bottom: 1.5em;
+    background-color: rgba(34, 37, 41, 1);
+    padding: 16px 0;
+    border-radius: 8px;
+    width: 60vw;
+    overflow-x: scroll; /* Optionally you can also use overflow: scroll; */
+}
+
+pre code {
+    font-family: 'Roboto Mono', monospace; 
+    display: block;
+    padding: 0 20px;
+    color:  rgba(215, 215, 215, 1);
+    line-height: 1.4em;
+    font-size: 0.95em;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Loose Code in Article */ 
+code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    padding: 2px;
+}
+
+/*
+pre code {
+    padding: 0 20px;
+    color: #a9bcbc;
+    line-height: 1.4em;
+    font-size: 0.95em;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: auto;
+    font-family: 'Roboto Mono', monospace; 
+    overflow-y: hidden;
+}
+*/
+
+pre code {
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .keyword {
+    color: #e73289;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .type {
+    color: #8281ca;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .call {
+    color: #348fe5;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .property {
+    color: #21ab9d;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .number {
+    color: #db6f57;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .string {
+    color: #fa641e;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .comment {
+    color: #6b8a94;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .dotAccess {
+    color: #92b300;
+    font-family: 'Roboto Mono', monospace; 
+}
+
+pre code .preprocessing {
+    color: #b68a00;
+    font-family: 'Roboto Mono', monospace; 
 }
 
 @media screen and (max-width: 768px) {
@@ -338,72 +471,15 @@ footer {
     .item-list {
         margin-top: 30px;
     }
-}
 
-/* Code-Splash CSS Colors*/
+    /* CODE IN ARTICLE*/ 
 
-pre {
-    display: block;
-    margin-bottom: 1.5em;
-    background-color: #1a1a1a;
-    padding: 16px 0;
-    border-radius: 16px;
-    word-wrap: normal;
-
-}
-
-pre code {
-    padding: 0 20px;
-    color: #a9bcbc;
-    line-height: 1.4em;
-    font-size: 0.95em;
-    overflow-x: auto;
-    white-space: pre;
-    -webkit-overflow-scrolling: touch;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .keyword {
-    color: #e73289;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .type {
-    color: #8281ca;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .call {
-    color: #348fe5;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .property {
-    color: #21ab9d;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .number {
-    color: #db6f57;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .string {
-    color: #fa641e;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .comment {
-    color: #6b8a94;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .dotAccess {
-    color: #92b300;
-    font-family: 'Roboto Mono', monospace; 
-}
-
-pre code .preprocessing {
-    color: #b68a00;
-    font-family: 'Roboto Mono', monospace; 
+    pre {
+        margin-bottom: 1.5em;
+        background-color: rgba(34, 37, 41, 1);
+        padding: 16px 0;
+        border-radius: 8px;
+        width: 85vw;
+        overflow-x: scroll; /* Optionally you can also use overflow: scroll; */
+    }
 }

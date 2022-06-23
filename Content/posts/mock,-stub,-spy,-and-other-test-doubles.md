@@ -49,7 +49,7 @@ class NotificationService {
     }
 }
 ```
-This code shows the logic of a service called NotificationService, which is fed through dependency injection with two other services: EmailService and DatabaseService. Basically, the validateStatus() method evaluates how many days are left for the service to expire (using DatabaseService) and if it is less than 10, an email is sent to the user (using EmailService).
+This code shows the logic of a service called NotificationService, which is fed through dependency injection with two other services: EmailService and DatabaseService. Basically, the `validateStatus()` method evaluates how many days are left for the service to expire (using DatabaseService) and if it is less than 10, an email is sent to the user (using EmailService).
 
 ### Dummy
 
@@ -71,7 +71,7 @@ class DummyDatabaseService: DatabaseService {
 }
 ```
 
-As you can see, using these implementations would cause the application to crash. The use of some kind of exception or error generator (NullPointerException, fatalError(), etc) is a good practice to avoid its use in production code.
+As you can see, using these implementations would cause the application to crash. The use of some kind of exception or error generator (`NullPointerException`, `fatalError()`, etc) is a good practice to avoid its use in production code.
 
 
 ```swift
@@ -91,7 +91,7 @@ class NotificationServiceTests_DummyExample: XCTest {
 }
 ```
 
-In order to test a function of the NotificationService service, the corresponding Test Double must exist for EmailService and for DatabaseService. Since they have no use in the test_onNotificationServiceInit_NotificationServiceIsNotNil() test case, it's okay to implement it as Dummy.
+In order to test a function of the NotificationService service, the corresponding Test Double must exist for EmailService and for DatabaseService. Since they have no use in the `test_onNotificationServiceInit_NotificationServiceIsNotNil()` test case, it's okay to implement it as Dummy.
 
 ### Stub
 
@@ -135,7 +135,7 @@ class SpyEmailService: EmailService {
     }
 }
 ```
-This Test Double will log the call to the sendEmail(mail:subject:) method via the emailServiceWasCalled boolean property.
+This Test Double will log the call to the `sendEmail(mail:subject:)` method via the `emailServiceWasCalled` boolean property.
 
 Thus, we can use the Spy in the following context:
 
@@ -157,7 +157,7 @@ class NotificationServiceTests_SpyExample: XCTest {
     }
 }
 ```
-The test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalled() test creates the [SUT](https://en.wikipedia.org/wiki/System_under_test) from the Stub we saw earlier for the DatabaseService and a Spy for the EmailService, which will save the information on whether the service was called or not. Since the Stub returns a default value less than 10, when calling validateStatus() the mailing service should have been called, exactly what is evaluated in the following XCTAssert statement.
+The `test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalled()` test creates the [SUT](https://en.wikipedia.org/wiki/System_under_test) from the Stub we saw earlier for the DatabaseService and a Spy for the EmailService, which will save the information on whether the service was called or not. Since the Stub returns a default value less than 10, when calling `validateStatus()` the mailing service should have been called, exactly what is evaluated in the following XCTAssert statement.
 
 But beware! The more internal information we are storing about how our module works, the greater the risk of coupling to the system implementation. And that can lead to brittle tests (that fail for reasons unrelated to the test).
 
@@ -185,8 +185,8 @@ class EmailServiceMock: EmailService {
 }
 ```
 
-The EmailServiceMock acts as a Spy, saving information regarding the call made. This information is then validated in the mock itself, in its verify() method, where it evaluates that the behavior has been as expected: in this case, that the service was actually called and that a single email was sent.
-This would be the evaluation, analyzing the result of the verify() method in the EmailServiceMock itself:
+The EmailServiceMock acts as a Spy, saving information regarding the call made. This information is then validated in the mock itself, in its `verify()` method, where it evaluates that the behavior has been as expected: in this case, that the service was actually called and that a single email was sent.
+This would be the evaluation, analyzing the result of the `verify()` method in the EmailServiceMock itself:
 
 ```swift
 func test_onNotificationServiceStatusValidationCloseToExpiration_EmailServiceIsCalledCorrectly() {
@@ -227,7 +227,7 @@ class FakeDatabaseService: DatabaseService {
 }
 ```
 
-This FakeDatabaseService will be an implementation of the functional DatabaseService service, since it is using a variable in memory to store the information obtained. As Martin Fowler mentions in InMemoryTestDatabase, Fake databases serve as a replacement for database access in test cases. Beyond the fact that there may be cases where an in-memory database is actually used, its use as a Test Double to test dependencies results in a fast and efficient testing practice, since long and slow setups are avoided, as usually required by databases configurations.
+This FakeDatabaseService will be an implementation of the functional DatabaseService service, since it is using a variable in memory to store the information obtained. [As Martin Fowler mentions in InMemoryTestDatabase](https://martinfowler.com/bliki/InMemoryTestDatabase.html), Fake databases serve as a replacement for database access in test cases. Beyond the fact that there may be cases where an in-memory database is actually used, its use as a Test Double to test dependencies results in a fast and efficient testing practice, since long and slow setups are avoided, as usually required by databases configurations.
 
 There are several types of Test Doubles with different intentions. Confusing and mixing your implementations can influence test design, and increase its brittleness. That is why it is of great importance to understand the types that exist and when to use each one.
 
