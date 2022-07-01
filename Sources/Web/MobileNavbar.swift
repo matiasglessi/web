@@ -39,7 +39,7 @@ struct MobileNavbar<Site: Website>: Component {
     */
     var body: Component {
         Wrapper {
-            H1("Matías Glessi 👨‍💻")
+            H1("Matías Glessi")
             List(mediaLinks) { item in
                 Link(item.title.capitalized, url: item.url)
                     .class(item.classValue)
