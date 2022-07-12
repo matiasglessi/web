@@ -11,6 +11,9 @@ import Plot
 struct SiteFooter: Component {
     var body: Component {
         Footer {
+            Wrapper {
+                Div()
+            }.class("section-breaker")
             Paragraph {
                 Text("Generated in Swift ❤️, using ")
                 Link("Publish", url: "https://github.com/johnsundell/publish")

@@ -3,7 +3,8 @@ title: Mock, Stub, Spy, and other Test Doubles
 date: 2022-02-23 21:21
 description: Brief review of the Mocking technique for testing, and the structures that can be used according to the need of the moment.
 tags: testing
-link: http://google.com.ar.
+crossPosted: http://google.com.ar
+pullRequest: http://google.com.ar
 ---
 
 Many times we find ourselves looking for a way to simulate objects and/or dependencies of our classes or modules when testing. That's where mock test objects come in, which in popular jargon are often called “Mocks”. Although this is not incorrect since they are elements that “mimic” something else, the correct term is Test Doubles.
@@ -240,14 +241,4 @@ There are several types of Test Doubles with different intentions. Confusing and
 - [amazon.com: xUnit Test Patterns Book](http://www.amazon.com/xUnit-Test-Patterns-Refactoring-Code/dp/0131495054)
 - [xunitpatterns.com: Test Double](http://xunitpatterns.com/Test%20Double.html)
 - [cleancoder.com: The Little Mocker](https://blog.cleancoder.com/uncle-bob/2014/05/14/TheLittleMocker.html)
-
-
-
----
-
-
-Do you see something strange or wrong in this article? It's hosted on [Github](), you can open a Pull Request for discussion and request an edit.
-You can also contact me directly [here](mailto:matiasglessi@gmail.com).
-
-
 

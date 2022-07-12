@@ -21,6 +21,7 @@ struct Presentation<Site: Website>: Component {
     var body: Component {
         Wrapper {
             H1("Hi 👋")
+            ImageProfile.build(for: .pages).class("about-avatar")
             Paragraph(page.content.body)
         }.class("presentation")
     }

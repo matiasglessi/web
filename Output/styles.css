@@ -160,15 +160,44 @@ ul {
     text-decoration: none;
 }
 
+
+
 footer {
-    margin-top: 80px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin-top: 5px;
     text-align: center;
-    border-top: 1px solid #CCC;
+}
+
+.wrapper.section-breaker div {
+    background-color: transparent;
+    border: 0;
+    border-top: 1px solid rgb(200, 200, 200);
+    display: block;
+    height: 0;
+    margin: 4rem auto 1rem;
+    text-align: center;
+    width: 50%;
 }
 
 /* Post Screen*/ 
 
 /* Header*/ 
+
+.wrapper.wrapper.header-section-breaker div {
+    background-color: transparent;
+    border: 0;
+    border-top: 1px solid rgb(200, 200, 200);
+    display: block;
+    height: 0;
+    margin: 1rem auto 1rem;
+    text-align: center;
+    width: 50%;
+}
+
 .wrapper.post-header {
     margin-top: 30px;
     margin-left: 40px;
@@ -245,7 +274,13 @@ footer {
     margin-top: 25px;
 }
 
+/* Post Signature */ 
 
+.wrapper.post-signature {
+    margin-top: 60px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
 
 /* Code-Splash CSS Colors*/
 
@@ -399,10 +434,11 @@ pre code .preprocessing {
     margin-bottom: 1.2em;
     display: grid;
     grid-template-columns: 50px 7px auto;
-    grid-template-rows: 25px 25px;
+    grid-template-rows: 25px 25px auto;
     grid-template-areas: 
         "logo . role"    
         "logo . company"
+        "description description description"
 }
 
 .experience-item img {
@@ -420,6 +456,17 @@ pre code .preprocessing {
 .experience-item h4 {
     grid-area: company;
     font-size: 0.85em;
+}
+
+.experience-description {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    grid-area: description;
+    font-size: 0.90em;
+}
+
+.about-avatar {
+    display: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -534,4 +581,15 @@ pre code .preprocessing {
     }
 
     /* ABOUT */
+
+    .about-avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
 }

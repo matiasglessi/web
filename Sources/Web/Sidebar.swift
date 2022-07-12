@@ -12,13 +12,11 @@ import Plot
 struct Sidebar<Site: Website>: Component {
     var context: PublishingContext<Site>
     var mediaLinks: [MediaLink] { [.location, .email, .linkedIn, .github] }
-
+    var profileType: ProfileType
+    
     var body: Component {
         Wrapper {
-            Image(
-                url: "https://avatars0.githubusercontent.com/u/9439622?s=460&v=4",
-                description: "Matias Glessi's profile picture"
-            )
+            ImageProfile.build(for: profileType)
             H1("Matías Glessi")
             H2("iOS Engineer")
             Wrapper {
