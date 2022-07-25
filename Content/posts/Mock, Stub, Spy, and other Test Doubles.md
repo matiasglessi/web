@@ -1,6 +1,6 @@
 ---
 title: Mock, Stub, Spy, and other Test Doubles
-date: 2022-02-23 21:21
+date: 2022-06-25 21:21
 description: Brief review of the Mocking technique for testing, and the structures that can be used according to the need of the moment.
 tags: testing
 crossPosted: http://google.com.ar
