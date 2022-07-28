@@ -32,5 +32,6 @@ try Web().publish(using: [
     .addMarkdownFiles(),
     .sortItems(by: \.date, order: .descending),
     .installPlugin(.readingTime()),
-    .generateHTML(withTheme: .myTheme)
+    .generateHTML(withTheme: .myTheme),
+    .deploy(using: .gitHub("matiasglessi/matiasglessi.github.io"))
 ])
