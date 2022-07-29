@@ -27,11 +27,11 @@ struct Web: Website {
 }
 
 try Web().publish(using: [
+    .deploy(using: .gitHub("matiasglessi/matiasglessi.github.io")),
     .installPlugin(.splash(withClassPrefix: "")),
     .copyResources(),
     .addMarkdownFiles(),
     .sortItems(by: \.date, order: .descending),
     .installPlugin(.readingTime()),
-    .generateHTML(withTheme: .myTheme),
-    .deploy(using: .gitHub("matiasglessi/matiasglessi.github.io"))
+    .generateHTML(withTheme: .myTheme)
 ])
