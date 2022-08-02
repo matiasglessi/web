@@ -13,8 +13,8 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
         
         let mediaLinks = [
-            MediaLink(title: "BLOG", url: "http://localhost:8000/", icon: "http://google.com.ar", classValue: "current"),
-            MediaLink(title: "ABOUT", url: "http://localhost:8000/about/", icon: "http://google.com.ar")
+            MediaLink(title: "BLOG", url: "../index.html", icon: "http://google.com.ar", classValue: "current"),
+            MediaLink(title: "ABOUT", url: "../about/index.html", icon: "http://google.com.ar")
         ]
         
         return HTML(
@@ -52,8 +52,8 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     
     func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
         let mediaLinks = [
-            MediaLink(title: "BLOG", url: "http://localhost:8000/", icon: "http://google.com.ar", classValue: "current"),
-            MediaLink(title: "ABOUT", url: "http://localhost:8000/about/", icon: "http://google.com.ar")
+            MediaLink(title: "BLOG", url: "../index.html", icon: "http://google.com.ar", classValue: "current"),
+            MediaLink(title: "ABOUT", url: "../about/index.html", icon: "http://google.com.ar")
         ]
 
         return HTML(
@@ -88,8 +88,8 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
         if page.isAbout() {
             let mediaLinks = [
-                MediaLink(title: "BLOG", url: "http://localhost:8000/", icon: "http://google.com.ar"),
-                MediaLink(title: "ABOUT", url: "http://localhost:8000/about/", icon: "http://google.com.ar", classValue: "current")
+                MediaLink(title: "BLOG", url: "../index.html", icon: "http://google.com.ar"),
+                MediaLink(title: "ABOUT", url: "../about/index.html", icon: "http://google.com.ar", classValue: "current")
             ]
             
             let careerExperiences = [
