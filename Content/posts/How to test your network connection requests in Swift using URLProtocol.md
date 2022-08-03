@@ -80,7 +80,7 @@ While this is another valid strategy, another problem makes this not the best so
 
 According to Apple's definition, the [URL Loading System](https://developer.apple.com/documentation/foundation/url_loading_system "URL Loading System") allows you to interact with URLs and communicate with servers using standard protocols (such as HTTP/HTTPS, for example) or with your **own protocols that you can create**.
 
-<img src="/images/posts/urlloadingsystem/URLLoadingSystem.png" alt="URL Loading System diagram" width="450"/>
+![URL Loading System diagram](/images/posts/urlloadingsystem/URLLoadingSystem.png)
 
 How does it work? Basically for every time a request is made, what happens behind the scenes is that there is a system (the URL Loading System) that processes it. As part of it, there is a type called *URLProtocol*, which is an **abstract class** that inherits from *NSObject*.
 

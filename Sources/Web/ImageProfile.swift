@@ -22,11 +22,3 @@ struct ImageProfile {
         )
     }
 }
-
-
-
-
-
-
-//http://localhost:8000/posts/Output/images/avatar.jpg
-//http://localhost:8000/Output/images/avatar.jpg

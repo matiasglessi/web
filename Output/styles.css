@@ -278,10 +278,9 @@ footer p {
     margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+    max-width: 80%;
+    height: auto;
+    width: auto\9; /* ie8 */
 }
 
 /* Post Signature */ 
