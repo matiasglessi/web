@@ -280,7 +280,6 @@ footer p {
     border-radius: 8px;
     max-width: 80%;
     height: auto;
-    width: auto\9; /* ie8 */
 }
 
 /* Post Signature */ 

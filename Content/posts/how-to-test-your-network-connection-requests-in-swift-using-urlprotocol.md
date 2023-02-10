@@ -1,6 +1,6 @@
 ---
 title: How to test your network connection requests in Swift using URLProtocol
-date: 2022-07-23 00:00
+date: 2022-08-11 00:00
 description: A reliable and decoupled approach to testing network requests in Swift.
 tags: testing, swift
 ---
@@ -97,7 +97,7 @@ In this case, we will create a mock that implements this class and we will evalu
 Since the URL Loading System processes requests through different protocols, we will create our own. This subclass of *URLProtocol* will have the objective of intercepting the information that is transmitted and validating it.
 
 ```swift
-    private class URLProtocolStub: URLProtocol { ... }
+private class URLProtocolStub: URLProtocol { ... }
 ```
 
 Since we want to intercept the information from a *URLRequest*, we could store this information in a structure within our *URLProtocolStub*. A dictionary could be a good option:

@@ -13,8 +13,8 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
         
         let mediaLinks = [
-            MediaLink(title: "BLOG", url: "../index.html", icon: "http://google.com.ar", classValue: "current"),
-            MediaLink(title: "ABOUT", url: "../about/index.html", icon: "http://google.com.ar")
+            MediaLink.build(for: .blog).current(),
+            MediaLink.build(for: .about)
         ]
         
         return HTML(
@@ -47,13 +47,13 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     }
     
     func makeSectionHTML(for section: Section<Site>, context: PublishingContext<Site>) throws -> HTML {
-        HTML("SectionHTML")
+        HTML("")
     }
     
     func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
         let mediaLinks = [
-            MediaLink(title: "BLOG", url: "../index.html", icon: "http://google.com.ar", classValue: "current"),
-            MediaLink(title: "ABOUT", url: "../about/index.html", icon: "http://google.com.ar")
+            MediaLink.build(for: .blog).current(),
+            MediaLink.build(for: .about)
         ]
 
         return HTML(
@@ -88,8 +88,8 @@ struct MyHTMLFactory<Site: Website>: HTMLFactory {
     func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
         if page.isAbout() {
             let mediaLinks = [
-                MediaLink(title: "BLOG", url: "../index.html", icon: "http://google.com.ar"),
-                MediaLink(title: "ABOUT", url: "../about/index.html", icon: "http://google.com.ar", classValue: "current")
+                MediaLink.build(for: .blog),
+                MediaLink.build(for: .about).current()
             ]
             
             let careerExperiences = [

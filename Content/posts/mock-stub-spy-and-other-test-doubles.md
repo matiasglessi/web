@@ -1,10 +1,9 @@
 ---
 title: Mock, Stub, Spy, and other Test Doubles
-date: 2022-06-25 21:21
+date: 2022-07-18 21:21
 description: Brief review of the Mocking technique for testing, and the structures that can be used according to the need of the moment.
 tags: testing
-crossPosted: http://google.com.ar
-pullRequest: http://google.com.ar
+crossPosted: https://medium.com/@matiasglessi/mock-stub-spy-and-other-test-doubles-a1869265ac47
 ---
 
 Many times we find ourselves looking for a way to simulate objects and/or dependencies of our classes or modules when testing. That's where mock test objects come in, which in popular jargon are often called “Mocks”. Although this is not incorrect since they are elements that “mimic” something else, the correct term is Test Doubles.
